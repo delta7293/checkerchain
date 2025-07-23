@@ -385,18 +385,17 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             "breakdown": {{
                 "project": 8.5,
                 "userbase": 7.0,
-                "utility": 8.0,
+                "utility": 9.0,
                 "security": 9.0,
-                "team": 7.5,
-                "tokenomics": 6.5,
+                "tokenomics": 6.8,
                 "marketing": 8.0,
                 "roadmap": 7.0,
                 "clarity": 8.5,
-                "partnerships": 7.0
+                "partnerships": 8.0
             }},
             "overall_score": [Score number],
             "review": [Review text],
-            "keywords": (Example: ["excellent", "trusted", "very-low-risk", "established", "promising"])
+            "keywords": (Example: ["excellent", "highly-trusted", "very-low-risk", "established", "promising"])
         }}
 
         ---
