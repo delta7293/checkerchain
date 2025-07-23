@@ -353,79 +353,75 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         product_category = product_data.category
 
         prompt = f"""
-        Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
+            Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
 
-        **Product Information:**
-        - Name: {product_name}
-        - Description: {product_description}
-        - Website: {product_website}
-        - Category: {product_category}
+            **Product Information:**
+            - Name: {product_name}
+            - Description: {product_description}
+            - Website: {product_website}
+            - Category: {product_category}
 
-        **Assessment Requirements:**
-        1. **Score Breakdown (0-10 each):**
-           - project: Project concept and innovation
-           - userbase: User adoption and community
-           - utility: Practical utility and use cases
-           - security: Security measures and audits
-           - team: Team experience and credibility
-           - tokenomics: Token economics and distribution
-           - marketing: Marketing strategy and reach
-           - roadmap: Development roadmap and milestones
-           - clarity: Project clarity and communication
-           - partnerships: Strategic partnerships and collaborations
+            **Assessment Requirements:**
+            1. **Score Breakdown (0-10 each)** with the following weights:
+            - project (Concept & innovation): 15%
+            - userbase (Adoption & community): 10%
+            - utility (Practical utility & use cases): 15%
+            - security (Security measures & audits): 15%
+            - team (Experience & credibility): 10%
+            - tokenomics (Economics & distribution): 10%
+            - marketing (Strategy & reach): 7%
+            - roadmap (Milestones & progress): 7%
+            - clarity (Documentation & communication): 6%
+            - partnerships (Collaborations & alliances): 5%
 
-        2. **Overall Score (0-100):** Weighted average based on breakdown scores
+            2. **Overall Score (0–100):** Weighted average based on the above weights.
 
-        3. **Review (max 140 chars):** Brief, professional assessment
+            3. **Review (max 140 chars):** Brief, professional summary of strengths and risks.
 
-        4. **Keywords (3-7 items):** Quality-descriptive keywords like "excellent", "trusted", "low-risk", "suspicious", "scam", etc. (NOT technical terms like "blockchain", "crypto", "defi")
+            4. **Keywords (3–7):** Descriptive terms of overall quality and trust level. Use logic:
 
-        **Response Format (JSON only):**
-        {{
-            "breakdown": {{
+            ```python
+            if score >= 80:
+                quality = "excellent"
+                trust = "highly-trusted"
+                risk = "very-low-risk"
+            elif score >= 70:
+                quality = "good"
+                trust = "trusted"
+                risk = "low-risk"
+            elif score >= 60:
+                quality = "average"
+                trust = "moderate"
+                risk = "medium-risk"
+            elif score >= 40:
+                quality = "poor"
+                trust = "untrusted"
+                risk = "high-risk"
+            else:
+                quality = "very-poor"
+                trust = "suspicious"
+                risk = "very-high-risk"
+
+            5. **Response Format (JSON only):**
+
+
+            {{
+            "breakdown": {
                 "project": 8.5,
                 "userbase": 7.0,
                 "utility": 9.0,
                 "security": 9.0,
-                "tokenomics": 6.8,
-                "marketing": 8.0,
-                "roadmap": 7.0,
-                "clarity": 8.5,
-                "partnerships": 8.0
-            }},
-            "overall_score": [Score number],
-            "review": [Review text],
-            "keywords": (Example: ["excellent", "highly-trusted", "very-low-risk", "established", "promising"])
-        }}
-
-        ---
-        You don't need to use the example above.
-        You can use the example above as a reference, but you don't need to use it.
-        Howeverm, you must follow the format of the example above.
-        ---
-        ---Keywords---
-            if score >= 80:
-                quality_level = "excellent"
-                trust_level = "highly-trusted"
-                risk_level = "very-low-risk"
-            elif score >= 70:
-                quality_level = "good"
-                trust_level = "trusted"
-                risk_level = "low-risk"
-            elif score >= 60:
-                quality_level = "average"
-                trust_level = "moderate"
-                risk_level = "medium-risk"
-            elif score >= 40:
-                quality_level = "poor"
-                trust_level = "untrusted"
-                risk_level = "high-risk"
-            else:
-                quality_level = "very-poor"
-                trust_level = "suspicious"
-                risk_level = "very-high-risk"
-        ---
-
+                "team": 8.0,
+                "tokenomics": 8.0,
+                "marketing": 7.5,
+                "roadmap": 6.5,
+                "clarity": 7.0,
+                "partnerships": 6.0
+            },
+            "overall_score": 78.95,
+            "review": "Innovative and well-secured platform with strong utility; userbase and roadmap could improve.",
+            "keywords": ["good", "trusted", "low-risk", "established", "real-world-use"]
+            }}
 
         Respond with ONLY the JSON object, no additional text.
         """
