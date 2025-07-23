@@ -59,7 +59,7 @@ class ReviewScoreSchema(BaseModel):
 
 
 # Create separate LLM instances for different purposes
-llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, max_tokens=2000)
+llm_structured = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1, max_tokens=5000)
 
 llm_text = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=1000)
 
@@ -406,7 +406,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
 
             {{
-            "breakdown": {
+            "breakdown": {{
                 "project": 8.5,
                 "userbase": 7.0,
                 "utility": 9.0,
@@ -417,11 +417,13 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
                 "roadmap": 6.5,
                 "clarity": 7.0,
                 "partnerships": 6.0
-            },
+            }},
             "overall_score": 78.95,
             "review": "Innovative and well-secured platform with strong utility; userbase and roadmap could improve.",
             "keywords": ["good", "trusted", "low-risk", "established", "real-world-use"]
             }}
+
+            
 
         Respond with ONLY the JSON object, no additional text.
         """

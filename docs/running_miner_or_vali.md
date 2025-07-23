@@ -194,7 +194,7 @@ miner    default  1      True   0.00000  0.00000  0.00000    0.00000    0.00000 
 Run the subnet miner:
 
 ```bash
-python neurons/miner.py --netuid 87 --wallet.name miner_mainnet --wallet.hotkey hotkey1 --logging.debug --blacklist.force_validator_permit --axon.port 8092
+python neurons/miner.py --netuid 87 --wallet.name miner_mainnet --wallet.hotkey default --logging.debug --blacklist.force_validator_permit --axon.port 8092
 ```
 
 Next, run the subnet validator:
