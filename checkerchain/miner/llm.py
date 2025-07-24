@@ -347,24 +347,20 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
     """
     try:
         # Prepare product information
-        product_name = product_data.name
-        product_description = product_data.description
-        product_website = product_data.url
-        product_category = product_data.category
 
         prompt = f"""
             You are an expert evaluator analyzing products based on multiple key factors. Review the product below and provide a score out of 100 with a breakdown (0-10 for each criterion). Calculate the overall score as the average of the breakdown scores multiplied by 10.
 
                 **Product Details:**
-                - Name: {product.name}
-                - Description: {product.description}
-                - Category: {product.category}
-                - URL: {product.url}
-                - Location: {product.location}
-                - Network: {product.network}
-                - Team: {len(product.teams)} members
-                - Marketing & Social Presence: {product.twitterProfile}
-                - Current Review Cycle: {product.currentReviewCycle}
+                - Name: {product_data.name}
+                - Description: {product_data.description}
+                - Category: {product_data.category}
+                - URL: {product_data.url}
+                - Location: {product_data.location}
+                - Network: {product_data.network}
+                - Team: {len(product_data.teams)} members
+                - Marketing & Social Presence: {product_data.twitterProfile}
+                - Current Review Cycle: {product_data.currentReviewCycle}
             
             1. **Score Breakdown (0-10 each)** with the following weights:
                 
