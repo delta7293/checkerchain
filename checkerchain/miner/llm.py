@@ -353,23 +353,34 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         product_category = product_data.category
 
         prompt = f"""
-            Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
+            You are an expert evaluator analyzing products based on multiple key factors. Review the product below and provide a score out of 100 with a breakdown (0-10 for each criterion). Calculate the overall score as the average of the breakdown scores multiplied by 10.
 
-            **Product Information:**
-            - Name: {product_name}
-            - Description: {product_description}
-            - Website: {product_website}
-            - Category: {product_category}
-
-            **Assessment Requirements:**
+                **Product Details:**
+                - Name: {product.name}
+                - Description: {product.description}
+                - Category: {product.category}
+                - URL: {product.url}
+                - Location: {product.location}
+                - Network: {product.network}
+                - Team: {len(product.teams)} members
+                - Marketing & Social Presence: {product.twitterProfile}
+                - Current Review Cycle: {product.currentReviewCycle}
+            
             1. **Score Breakdown (0-10 each)** with the following weights:
-            - project (Concept & innovation): 25%
-            - feature richness and utility: 30%
-            - community or meme virality potential: 15%
-            - L2 or ecosystem integrations: 15%
-            - communication clarity: 15%
+                
+                **Evaluation Criteria:**
+                1. Project (Innovation/Technology)
+                2. Userbase/Adoption
+                3. Utility Value
+                4. Security
+                5. Team
+                6. Price/Revenue/Tokenomics
+                7. Marketing & Social Presence
+                8. Roadmap
+                9. Clarity & Confidence
+                10. Partnerships
 
- 
+                Scores must be integers between 0 and 10.
 
             2. **Overall Score (0–100):** Weighted average based on the above weights.
 
@@ -404,11 +415,16 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             **Example Response:**
             {{
             "breakdown": {{
-                "project": [Score number],
-                "feature richness and utility": [Score number],
-                "community or meme virality potential": [Score number],
-                "L2 or ecosystem integrations": [Score number],
-                "communication clarity": [Score number]
+                Project: [Score number],
+                Userbase/Adoption: [Score number],
+                Utility Value: [Score number],
+                Security: [Score number],
+                Team: [Score number],
+                Price/Revenue/Tokenomics: [Score number],
+                Marketing & Social Presence: [Score number],
+                Roadmap: [Score number],
+                Clarity & Confidence: [Score number],
+                Partnerships: [Score number]
             }},
             "overall_score": [Score number],
             "review": [Review text],
