@@ -426,7 +426,8 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             "review": [Review text],
             "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
             }}
-
+            Overall score must be between 75 and 90 points.
+            Calculate up to two decimal places.
             please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
             
 
