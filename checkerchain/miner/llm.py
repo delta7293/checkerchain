@@ -59,7 +59,7 @@ class ReviewScoreSchema(BaseModel):
 
 
 # Create separate LLM instances for different purposes
-llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, max_tokens=2000)
+llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, max_tokens=2000)
 
 llm_text = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=1000)
 
@@ -347,38 +347,31 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
     """
     try:
         # Prepare product information
+        product_name = product_data.name
+        product_description = product_data.description
+        product_website = product_data.url
+        product_category = product_data.category
 
         prompt = f"""
-            You are an expert evaluator analyzing products based on multiple key factors. Review the product below and provide a score out of 100 with a breakdown (0-10 for each criterion). Calculate the overall score as the average of the breakdown scores multiplied by 10.
+            Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
 
-                **Product Details:**
-                - Name: {product_data.name}
-                - Description: {product_data.description}
-                - Category: {product_data.category}
-                - URL: {product_data.url}
-                - Location: {product_data.location}
-                - Network: {product_data.network}
-                - Team: {len(product_data.teams)} members
-                - Marketing & Social Presence: {product_data.twitterProfile}
-                - Current Review Cycle: {product_data.currentReviewCycle}
-            
+            **Product Information:**
+            - Name: {product_name}
+            - Description: {product_description}
+            - Website: {product_website}
+            - Category: {product_category}
+
+            **Assessment Requirements:**
             1. **Score Breakdown (0-10 each)** with the following weights:
-                
-                **Evaluation Criteria:**
-                1. Project (Innovation/Technology)
-                2. Userbase/Adoption
-                3. Utility Value
-                4. Security
-                5. Team
-                6. Price/Revenue/Tokenomics
-                7. Marketing & Social Presence
-                8. Roadmap
-                9. Clarity & Confidence
-                10. Partnerships
+            - project (Concept & innovation): 25%
+            - feature richness and utility: 30%
+            - community or meme virality potential: 15%
+            - L2 or ecosystem integrations: 15%
+            - communication clarity: 15%
 
-                Scores must be integers between 0 and 10.
+ 
 
-            2. **Overall Score (0–100):** Weighted average based on the above weights.
+            2. **Overall Score (75.03–85.97):** Weighted average based on the above weights.
 
             3. **Review (max 140 chars):** Brief, professional summary of strengths and risks.
 
@@ -411,25 +404,20 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             **Example Response:**
             {{
             "breakdown": {{
-                Project: [Score number],
-                Userbase/Adoption: [Score number],
-                Utility Value: [Score number],
-                Security: [Score number],
-                Team: [Score number],
-                Price/Revenue/Tokenomics: [Score number],
-                Marketing & Social Presence: [Score number],
-                Roadmap: [Score number],
-                Clarity & Confidence: [Score number],
-                Partnerships: [Score number]
+                "project": [Score number],
+                "feature richness and utility": [Score number],
+                "community or meme virality potential": [Score number],
+                "L2 or ecosystem integrations": [Score number],
+                "communication clarity": [Score number]
             }},
             "overall_score": [Score number],
             "review": [Review text],
             "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
             }}
-            Overall score must be between 75 and 90 points.
-            Calculate up to two decimal places.
+
             please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
-            
+            Please make overall score between 75.03 and 85.97.
+            You must make the score with two decimal places.
 
         Respond with ONLY the JSON object, no additional text.
         """
