@@ -59,7 +59,7 @@ class ReviewScoreSchema(BaseModel):
 
 
 # Create separate LLM instances for different purposes
-llm_structured = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1, max_tokens=2000)
+llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, max_tokens=2000)
 
 llm_text = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=1000)
 
@@ -404,7 +404,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
             5. **Response Format (JSON only):**
 
-
+            **Example Response:**
             {{
             "breakdown": {{
                 "project": 8.5,
@@ -412,17 +412,18 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
                 "utility": 9.0,
                 "security": 9.0,
                 "team": 8.0,
-                "tokenomics": 8.0,
+                "tokenomics": 7,
                 "marketing": 7.5,
-                "roadmap": 6.5,
-                "clarity": 7.0,
-                "partnerships": 6.0
+                "roadmap": 9,
+                "clarity": 8.0,
+                "partnerships": 7.0
             }},
-            "overall_score": 78.95,
-            "review": "Innovative and well-secured platform with strong utility; userbase and roadmap could improve.",
+            "overall_score": [Score number],
+            "review": [Review text],
             "keywords": ["good", "trusted", "low-risk", "established", "real-world-use"]
             }}
 
+            please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
             
 
         Respond with ONLY the JSON object, no additional text.
