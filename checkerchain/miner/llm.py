@@ -363,16 +363,13 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
             **Assessment Requirements:**
             1. **Score Breakdown (0-10 each)** with the following weights:
-            - project (Concept & innovation): 15%
-            - userbase (Adoption & community): 10%
-            - utility (Practical utility & use cases): 15%
-            - security (Security measures & audits): 15%
-            - team (Experience & credibility): 10%
-            - tokenomics (Economics & distribution): 10%
-            - marketing (Strategy & reach): 7%
-            - roadmap (Milestones & progress): 7%
-            - clarity (Documentation & communication): 6%
-            - partnerships (Collaborations & alliances): 5%
+            - project (Concept & innovation): 25%
+            - feature richness and utility: 30%
+            - community or meme virality potential: 15%
+            - L2 or ecosystem integrations: 15%
+            - communication clarity: 15%
+
+ 
 
             2. **Overall Score (0–100):** Weighted average based on the above weights.
 
@@ -407,20 +404,15 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             **Example Response:**
             {{
             "breakdown": {{
-                "project": 8.5,
-                "userbase": 7.0,
-                "utility": 9.0,
-                "security": 9.0,
-                "team": 8.0,
-                "tokenomics": 7,
-                "marketing": 7.5,
-                "roadmap": 9,
-                "clarity": 8.0,
-                "partnerships": 7.0
+                "project": [Score number],
+                "feature richness and utility": [Score number],
+                "community or meme virality potential": [Score number],
+                "L2 or ecosystem integrations": [Score number],
+                "communication clarity": [Score number]
             }},
             "overall_score": [Score number],
             "review": [Review text],
-            "keywords": ["good", "trusted", "low-risk", "established", "real-world-use"]
+            "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
             }}
 
             please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
