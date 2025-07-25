@@ -162,7 +162,7 @@ class Miner(BaseMinerNeuron):
     def get_emission(self):
         uid = self.metagraph.hotkeys.index(self.wallet.hotkey.ss58_address)
         emission = self.metagraph.E[uid]
-        bt.logging.info(f"Emissions:: {emission}")
+        bt.logging.info(f"Emissions: {emission}")
 
 
 # This is the main function, which runs the miner.
