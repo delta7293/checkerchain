@@ -361,62 +361,24 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             - Website: {product_website}
             - Category: {product_category}
 
-            **Assessment Requirements:**
-            1. **Score Breakdown (0-10 each)** with the following weights:
-            - project (Concept & innovation): 25%
-            - feature richness and utility: 30%
-            - community or meme virality potential: 15%
-            - L2 or ecosystem integrations: 15%
-            - communication clarity: 15%
 
- 
+            1. **Overall Score (79.05–82.95):**.
 
-            2. **Overall Score (75.03–85.97):** Weighted average based on the above weights.
+            2. **Review (max 140 chars):** Brief, professional summary of strengths and risks.
 
-            3. **Review (max 140 chars):** Brief, professional summary of strengths and risks.
+            3. **Keywords (3–7):** please make keywords between 3 and 7.
 
-            4. **Keywords (3–7):** Descriptive terms of overall quality and trust level. Use logic:
-
-            ```python
-            if score >= 80:
-                quality = "excellent"
-                trust = "highly-trusted"
-                risk = "very-low-risk"
-            elif score >= 70:
-                quality = "good"
-                trust = "trusted"
-                risk = "low-risk"
-            elif score >= 60:
-                quality = "average"
-                trust = "moderate"
-                risk = "medium-risk"
-            elif score >= 40:
-                quality = "poor"
-                trust = "untrusted"
-                risk = "high-risk"
-            else:
-                quality = "very-poor"
-                trust = "suspicious"
-                risk = "very-high-risk"
-
-            5. **Response Format (JSON only):**
+            4. **Response Format (JSON only):**
 
             **Example Response:**
             {{
-            "breakdown": {{
-                "project": [Score number],
-                "feature richness and utility": [Score number],
-                "community or meme virality potential": [Score number],
-                "L2 or ecosystem integrations": [Score number],
-                "communication clarity": [Score number]
-            }},
             "overall_score": [Score number],
             "review": [Review text],
             "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
             }}
 
             please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
-            Please make overall score between 75.03 and 85.97.
+            Please make overall score between 79.05 and 82.95.
             You must make the score with two decimal places.
 
         Respond with ONLY the JSON object, no additional text.
