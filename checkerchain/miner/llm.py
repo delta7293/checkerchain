@@ -59,7 +59,7 @@ class ReviewScoreSchema(BaseModel):
 
 
 # Create separate LLM instances for different purposes
-llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=2000)
+llm_structured = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, max_tokens=2000)
 
 llm_text = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=1000)
 
@@ -353,9 +353,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         product_category = product_data.category
 
         prompt = f"""
-            You are an expert reviewer evaluating DeFi and crypto products from a user-centered and ecosystem-aware perspective.
-
-            Given the following **Product Information**, evaluate the product quality and write an assessment in JSON format:
+            Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
 
             **Product Information:**
             - Name: {product_name}
@@ -363,43 +361,27 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             - Website: {product_website}
             - Category: {product_category}
 
-            Your response must follow **ALL** of these rules:
 
-            ---
+            1. **Overall Score (81.05–84.95):**.
 
-            1. **Overall Score (required):**
-            - Provide a numerical score between **81.05 and 84.95**.
-            - Use **exactly two decimal places**.
-            - Base your score on a holistic evaluation of product innovation, user appeal, clarity, and real-world relevance (even if detailed technical info is missing).
+            2. **Review (max 140 chars):** Write a professional review. You can include words like perfect, awesome, cool, etc., but don't go to extremes. Think of yourself as a user and evaluate the product. And always write a humanized review.
 
-            ---
-
-            2. **Review (required):**
-            - Write a concise, **human-like review under 140 characters**.
-            - The tone should be **professional**, slightly positive, and realistic.
-            - You may include expressions like *“solid,” “awesome,” “clean UX,” “surprisingly useful,”* but avoid extreme language or hype.
-            - Speak as if you are a real user who tried it and is recommending or giving feedback.
-
-            ---
-
-            3. **Keywords (required, 3–7 items):**
-            Instead of only trust-based keywords, include **a mix from these 3 classes**:
-            - **Sentiment/Trust**: excellent, reliable, high-quality, low-risk, promising, early-stage, suspicious
-            - **Function/Scope**: scalable, real-world-use, cross-chain, innovative, experimental, focused
-            - **User Perception**: cool, engaging, clean design, meme-worthy, gamified, power-user-friendly
-
-            ⚠️ All keywords must be **lowercase**, concise, and relevant to the product you evaluated.
-
-            ---
+            3. **Keywords (3–7):** please make keywords between 3 and 7.
 
             4. **Response Format (JSON only):**
-            ```json
-            {
-            "overall_score": [float: score between 81.05–84.95],
-            "review": "[short humanized review text]",
-            "keywords": ["keyword1", "keyword2", "keyword3", "..."]  
-            }
 
+            **Example Response:**
+            {{
+            "overall_score": [Score number],
+            "review": [Review text],
+            "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
+            }}
+
+            please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
+            Please make overall score between 81.05 and 84.95.
+            You must make the score with two decimal places.
+
+        Respond with ONLY the JSON object, no additional text.
         """
 
         result = await llm_structured.ainvoke(
