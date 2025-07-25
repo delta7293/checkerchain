@@ -362,7 +362,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             - Category: {product_category}
 
 
-            1. **Overall Score (81.05–84.95):**.
+            1. **Overall Score (79.05–82.95):**.
 
             2. **Review (max 140 chars):** Write a professional review. You can include words like perfect, awesome, cool, etc., but don't go to extremes. Think of yourself as a user and evaluate the product. And always write a humanized review.
 
@@ -378,7 +378,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             }}
 
             please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
-            Please make overall score between 81.05 and 84.95.
+            Please make overall score between 79.05 and 82.95.
             You must make the score with two decimal places.
 
         Respond with ONLY the JSON object, no additional text.
