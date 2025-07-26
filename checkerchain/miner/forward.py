@@ -49,11 +49,11 @@ async def forward(self: Miner, synapse: checkerchain.protocol.CheckerChainSynaps
                 if isinstance(result, Exception):
                     raise result
 
-                miner_preds[product_id] = result
+                # miner_preds[product_id] = result
                 responses[i] = result
 
                 bt.logging.info(
-                    f"Complete assessment for product {product_id}: Score={result['score']}, Keywords={result['keywords']}, Review={result['review']}"
+                    f"Complete assessment for product {product_id}: {result}"
                 )
             except Exception as e:
                 bt.logging.error(f"Error assessing product {product_id}: {e}")

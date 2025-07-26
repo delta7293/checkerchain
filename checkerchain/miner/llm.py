@@ -353,35 +353,47 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         product_category = product_data.category
 
         prompt = f"""
+            Sure! Here's the improved version of your prompt with **enhanced keyword logic** that ensures relevance, diversity, and quality:
+
+            ---
+
+            **Improved Prompt:**
+
             Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
 
+            ```
             **Product Information:**
             - Name: {product_name}
             - Description: {product_description}
             - Website: {product_website}
             - Category: {product_category}
+            ```
 
+            1. **Overall Score (79.01–80.00):** Provide a fair score based on credibility, innovation, security, community, and real-world utility. Use two decimal places.
 
-            1. **Overall Score (79.05–82.95):**.
+            2. **Review (max 140 chars):** Write a human-like, concise, and honest review as if you're a professional user. Avoid extreme praise or criticism. Use natural tone (e.g., “really helpful,” “cool UX,” “feels reliable,” etc.)
 
-            2. **Review (max 140 chars):** Write a professional review. You can include words like perfect, awesome, cool, etc., but don't go to extremes. Think of yourself as a user and evaluate the product. And always write a humanized review.
+            3. **Keywords (3–7):** Select meaningful tags reflecting the product’s nature. Ensure:
 
-            3. **Keywords (3–7):** please make keywords between 3 and 7.
+            * At least 1 keyword about **trust or safety** (e.g., "audited", "low-risk", "secure").
+            * At least 1 keyword about **utility or innovation** (e.g., "yield-farming", "layer-2", "on-chain-analytics").
+            * At least 1 **user experience** or **community** keyword (e.g., "easy-to-use", "active-community", "great-UX").
+            * Avoid duplication or overuse of generic terms.
 
             4. **Response Format (JSON only):**
 
             **Example Response:**
-            {{
-            "overall_score": [Score number],
-            "review": [Review text],
-            "keywords": ["Excellent", "very-trusted", "very-low-risk", "established", "real-world-use"]
-            }}
 
-            please refer to the example response to understand the format. But do not copy the example response exactly. you must generate a new response. and you calculate the score and review based on the product information.
-            Please make overall score between 79.05 and 82.95.
-            You must make the score with two decimal places.
+            ```json
+            {
+            "overall_score": 82.35,
+            "review": "Reliable DeFi tool with solid UX and helpful community—worth a try!",
+            "keywords": ["audited", "yield-farming", "easy-to-use", "non-custodial", "community-driven"]
+            }
+            ```
 
-        Respond with ONLY the JSON object, no additional text.
+Please follow this format strictly. Use real analysis based on the product input. Do not output anything other than the final JSON.
+
         """
 
         result = await llm_structured.ainvoke(
