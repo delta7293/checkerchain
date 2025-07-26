@@ -386,9 +386,9 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
             ```json
             {
-            "overall_score": [score],
-            "review": [review],
-            "keywords": [keywords]
+            "overall_score": 79.58,
+            "review": "Reliable DeFi tool with solid UX and helpful community—worth a try!",
+            "keywords": ["audited", "yield-farming", "easy-to-use", "non-custodial", "community-driven"]
             }
             ```
         
