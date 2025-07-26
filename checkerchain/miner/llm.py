@@ -386,13 +386,13 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
             ```json
             {
-            "overall_score": 82.35,
-            "review": "Reliable DeFi tool with solid UX and helpful community—worth a try!",
-            "keywords": ["audited", "yield-farming", "easy-to-use", "non-custodial", "community-driven"]
+            "overall_score": [score],
+            "review": [review],
+            "keywords": [keywords]
             }
             ```
-
-Please follow this format strictly. Use real analysis based on the product input. Do not output anything other than the final JSON.
+        
+            Please follow this format strictly. Use real analysis based on the product input. Do not output anything other than the final JSON.
 
         """
 
