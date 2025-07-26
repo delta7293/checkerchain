@@ -59,7 +59,7 @@ class ReviewScoreSchema(BaseModel):
 
 
 # Create separate LLM instances for different purposes
-llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, max_tokens=2000)
+llm_structured = ChatOpenAI(model="gpt-4o-mini", temperature=1, max_tokens=2000)
 
 llm_text = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, max_tokens=1000)
 
@@ -369,7 +369,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             - Category: {product_category}
             ```
 
-            1. **Overall Score (79.01–80.00):** Provide a fair score based on credibility, innovation, security, community, and real-world utility. Use two decimal places.
+            1. **Overall Score (80.00-90.00):** Provide a fair score based on credibility, innovation, security, community, and real-world utility. Use two decimal places.
 
             2. **Review (max 140 chars):** Write a human-like, concise, and honest review as if you're a professional user. Avoid extreme praise or criticism. Use natural tone (e.g., “really helpful,” “cool UX,” “feels reliable,” etc.)
 
