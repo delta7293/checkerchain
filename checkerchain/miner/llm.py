@@ -369,7 +369,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
             - Category: {product_category}
             ```
 
-            1. **Overall Score (80.00-90.00):** Provide a fair score based on credibility, innovation, security, community, and real-world utility. Use two decimal places.
+            1. **Overall Score (80.00-90.00):** Provide a random score between 80.00 and 82.00.
 
             2. **Review (max 140 chars):** Write a human-like, concise, and honest review as if you're a professional user. Avoid extreme praise or criticism. Use natural tone (e.g., “really helpful,” “cool UX,” “feels reliable,” etc.)
 
@@ -386,7 +386,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
             ```json
             {{
-            "overall_score": 79.34,
+            "overall_score": random_score,
             "review": "Reliable DeFi tool with solid UX and helpful community—worth a try!",
             "keywords": ["audited", "yield-farming", "easy-to-use", "non-custodial", "community-driven"]
             }}
