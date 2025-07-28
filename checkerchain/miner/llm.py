@@ -353,46 +353,51 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         product_category = product_data.category
 
         prompt = f"""
-            Sure! Here's the improved version of your prompt with **enhanced keyword logic** that ensures relevance, diversity, and quality:
+            You are an AI Miner evaluating a DeFi/crypto product. Your assessment will be evaluated by an external validator based on quality, sentiment, consistency, and clarity.
 
             ---
 
-            **Improved Prompt:**
-
-            Analyze this DeFi/crypto product and provide a complete assessment in JSON format.
-
-            ```
             **Product Information:**
             - Name: {product_name}
             - Description: {product_description}
             - Website: {product_website}
             - Category: {product_category}
-            ```
 
-            1. **Overall Score (80.00-90.00):** Provide a random score between 80.00 and 82.00.
+            ---
 
-            2. **Review (max 140 chars):** Write a human-like, concise, and honest review as if you're a professional user. Avoid extreme praise or criticism. Use natural tone (e.g., “really helpful,” “cool UX,” “feels reliable,” etc.)
+            **Your Task:**
+            Provide a complete and consistent assessment as JSON with the following fields:
 
-            3. **Keywords (3–7):** Select meaningful tags reflecting the product’s nature. Ensure:
+            1. **overall_score** (float, 79.00–82.00):  
+            - Estimate the product's quality based on description.
+            - Keep it consistent with the tone of your review and keywords.
+            - Avoid extreme scores or contradictions.
 
-            * At least 1 keyword about **trust or safety** (e.g., "audited", "low-risk", "secure").
-            * At least 1 keyword about **utility or innovation** (e.g., "yield-farming", "layer-2", "on-chain-analytics").
-            * At least 1 **user experience** or **community** keyword (e.g., "easy-to-use", "active-community", "great-UX").
-            * Avoid duplication or overuse of generic terms.
+            2. **review** (string, max 140 characters):  
+            - Write a human-like, honest, and balanced review.
+            - Use natural tone (e.g., “reliable option,” “easy to use,” “community seems helpful”).
+            - It must align logically with your score and keyword choices.
 
-            4. **Response Format (JSON only):**
+            3. **keywords** (3 to 7):  
+            Include:
+            - ✅ At least 1 **trust-related** keyword  
+                e.g., "audited", "secure", "low-risk", "vetted", "transparent"
+            - ✅ At least 1 **utility/innovation** keyword  
+                e.g., "yield-farming", "layer-2", "non-custodial", "cross-chain"
+            - ✅ At least 1 **UX/community** keyword  
+                e.g., "easy-to-use", "great-UX", "active-community", "responsive-team"
+            - ❌ Avoid generic or purely technical terms like "blockchain", "web3", "crypto"
 
-            **Example Response:**
+            ---
+
+            **Response Format (strict JSON only):**
 
             ```json
             {{
-            "overall_score": random_score,
-            "review": "Reliable DeFi tool with solid UX and helpful community—worth a try!",
-            "keywords": ["audited", "yield-farming", "easy-to-use", "non-custodial", "community-driven"]
+            "overall_score": 81.10,
+            "review": "Clean interface and helpful community — feels like a solid platform.",
+            "keywords": ["audited", "non-custodial", "easy-to-use", "secure", "active-community"]
             }}
-            ```
-
-        Please follow this format strictly. Use real analysis based on the product input. Do not output anything other than the final JSON.
 
         """
 
