@@ -91,8 +91,8 @@ async def create_text_llm():
     try:
         model = ChatOpenAI(
             api_key=OPENAI_API_KEY,
-            model="gpt-4o",
-            max_tokens=500,
+            model="gpt-4o-mini",
+            max_tokens=1000,
             temperature=0.7,
             top_p=1.0,
             frequency_penalty=0.0,
