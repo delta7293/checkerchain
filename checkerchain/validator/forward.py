@@ -60,6 +60,7 @@ async def forward(self: Validator):
         unmined_db_products = db_get_unreviewd_products()
         queries = [p._id for p in unmined_db_products]
 
+    print(f"Miner UIDs: {miner_uids}")
     responses = []
     if len(queries):
         responses = await self.dendrite(
@@ -68,7 +69,7 @@ async def forward(self: Validator):
             timeout=25,
             deserialize=True,
         )
-        bt.logging.info(f"Received responses: {responses}")
+        # bt.logging.info(f"Received responses: {responses}")
 
         for miner_uid, miner_predictions in zip(miner_uids, responses):
             for product_idx, prediction in enumerate(miner_predictions):

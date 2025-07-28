@@ -374,7 +374,7 @@ class BaseValidatorNeuron(BaseNeuron):
 
     def update_to_last_scores(self):
         """Updates the last scores to the current scores."""
-        bt.logging.info("Falling back to last scores.")
+        bt.logging.info("Falling back to last scores:" + str(self.last_scores))
         self.scores = copy.deepcopy(self.last_scores)
 
     def save_state(self):
