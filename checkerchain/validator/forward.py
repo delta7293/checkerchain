@@ -76,6 +76,7 @@ async def forward(self: Validator):
                 score = (
                     prediction.get("score") if isinstance(prediction, dict) else None
                 )
+                print(f"Score: {score}")
                 review = (
                     prediction.get("review") if isinstance(prediction, dict) else None
                 )
@@ -84,7 +85,7 @@ async def forward(self: Validator):
                     if isinstance(prediction, dict)
                     else []
                 )
-
+                print(f"Review: {review}")
                 if keywords:
                     if len(keywords) < 3:
                         bt.logging.warning(
@@ -94,7 +95,7 @@ async def forward(self: Validator):
                         bt.logging.warning(
                             f"Miner {miner_uid}: Too many keywords ({len(keywords)}): {keywords}"
                         )
-
+                print(f"Review: {review}")
         for miner_uid, miner_predictions in zip(miner_uids, responses):
             for product_id, prediction in zip(queries, miner_predictions):
                 if product_id not in products_to_score:
