@@ -76,6 +76,7 @@ async def forward(self: Validator):
                 score = (
                     prediction.get("score") if isinstance(prediction, dict) else None
                 )
+                bt.logging.info(f"Miner UID: {miner_uid}, product_idx: {product_idx}")
                 bt.logging.info(f"Score: {score}")
                 review = (
                     prediction.get("review") if isinstance(prediction, dict) else None
