@@ -464,16 +464,16 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
 
         return validated_response
 
-    except Exception as e:
-        bt.logging.error(f"Error in complete assessment generation: {e}")
-        # Return fallback response
-        return {
-            "score": None,
-            "review": None,
-            "keywords": [],
-        }
-    finally:
-        time.sleep(0.01)
+    # except Exception as e:
+    #     bt.logging.error(f"Error in complete assessment generation: {e}")
+    #     # Return fallback response
+    #     return {
+    #         "score": None,
+    #         "review": None,
+    #         "keywords": [],
+    #     }
+    # finally:
+    #     time.sleep(0.01)
 
 
 async def analyze_complete_response(
