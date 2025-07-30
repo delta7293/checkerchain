@@ -112,6 +112,7 @@ async def get_rewards(
     # Process rewards asynchronously
     reward_tasks = []
     for i, (response, uid) in enumerate(zip(responses, miner_uids)):
+        bt.logging.info(f"Response: {response}")
         if response.prediction is not None:
             task = reward(self, response, reviewed_product.trustScore, uid)
             reward_tasks.append((i, task))
