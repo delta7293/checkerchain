@@ -23,20 +23,20 @@ async def forward(self: Miner, synapse: checkerchain.protocol.CheckerChainSynaps
     responses = [None] * len(synapse.query)  # Placeholder for response dicts
     results = []
     for i, product_id in enumerate(synapse.query):
-        # if product_id in miner_preds:
-        #     bt.logging.info(
-        #         f"Using cached prediction for {product_id}: {miner_preds[product_id]}"
-        #     )
-        #     cached_data = miner_preds[product_id]
-        #     responses[i] = cached_data
-        # else:
-        product = fetch_product_data(product_id)
-        if product:
-            product_ids.append((i, product_id))  # To map back later
-            tasks.append(generate_complete_assessment(product))
+        if product_id in miner_preds:
+            bt.logging.info(
+                f"Using cached prediction for {product_id}: {miner_preds[product_id]}"
+            )
+            cached_data = miner_preds[product_id]
+            responses[i] = cached_data
         else:
-            bt.logging.warning(f"Product not found for {product_id}")
-            responses[i] = {"score": None, "review": None, "keywords": []}
+            product = fetch_product_data(product_id)
+            if product:
+                product_ids.append((i, product_id))  # To map back later
+                tasks.append(generate_complete_assessment(product))
+            else:
+                bt.logging.warning(f"Product not found for {product_id}")
+                responses[i] = {"score": None, "review": None, "keywords": []}
     if len(tasks) > 0:
         bt.logging.info("Running OpenAI assessment tasks...")
         results = await asyncio.gather(*tasks, return_exceptions=True)

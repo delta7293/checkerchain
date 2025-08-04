@@ -137,7 +137,7 @@ Register your validator key to the subnet:\
 \***\*Add `--subtensor.network test` for testnet\*\***
 
 ```bash
-btcli subnet register --netuid 87 --wallet.name validator --wallet.hotkey default
+btcli subnet register --netuid 87 --wallet.name miner --wallet.hotkey default
 ```
 
 Follow the prompts:
@@ -200,7 +200,7 @@ python neurons/miner.py --netuid 87 --wallet.name miner --wallet.hotkey default 
 Next, run the subnet validator:
 
 ```bash
-python neurons/validator.py --netuid 87 --wallet.name validator --wallet.hotkey default --logging.debug
+python neurons/validator.py --netuid 87 --wallet.name miner --wallet.hotkey default --logging.debug
 ```
 
 ## 7. Stopping your nodes
