@@ -427,7 +427,7 @@ async def generate_complete_assessment(product_data: UnreviewedProduct) -> dict:
         # Validate and structure the response
         random_int = random.randint(10, 82)
         random_point =  float(random_int / 100)
-        random_mainnumber = random.randint(81, 84)
+        random_mainnumber = random.randint(80, 82)
         score = random_mainnumber + random_point
         review = """    
         Innovative DeFi options platform with robust infrastructure for derivatives trading. Strong security focus with bug bounty program indicates commitment to safety.
