@@ -788,7 +788,7 @@ async def verify_quality_keywords(keywords: List[str], score: float) -> float:
     except Exception as e:
         bt.logging.error(f"Quality keyword verification failed: {e}")
         return 0.0
-
+d
 
 async def analyze_sentiment(review: str) -> str:
     """
